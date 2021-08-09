@@ -126,4 +126,118 @@ def game_hash
   }
 end
 
-# Write code here
+def home
+  game_hash[:home][:players]
+end
+
+def away
+  away = game_hash[:away][:players]
+end
+
+def num_points_scored(name)
+  points = 0
+  home.each do |player|
+    if player[:player_name] == name
+      points = player[:points]
+    end
+  end
+  away.each do |player|
+    if player[:player_name] == name
+      points = player[:points]
+    end
+  end
+  points
+end
+
+def shoe_size(name)
+  shoe = 0
+  home.each do |player|
+    if player[:player_name] == name
+      shoe = player[:shoe]
+    end
+  end
+  away.each do |player|
+    if player[:player_name] == name
+      shoe = player[:shoe]
+    end
+  end
+  shoe
+end
+
+def team_colors(name)
+  if game_hash[:home][:team_name] == name
+    game_hash[:home][:colors]
+  else
+    game_hash[:away][:colors]
+  end
+end
+
+def team_names
+  newArray = []
+  newArray.push(game_hash[:home][:team_name])
+  newArray.push(game_hash[:away][:team_name])
+  newArray
+end
+
+def player_numbers(name)
+  newArray = []
+  if game_hash[:home][:team_name] == name
+    home.each do |player|
+      newArray.push(player[:number])
+    end
+  else
+    away.each do |player|
+      newArray.push(player[:number])
+    end
+  end
+  newArray
+end
+
+def player_stats(name)
+  stats = {}
+  home.each do |player|
+    if player[:player_name] == name
+      player.each do |stat|
+        stats[stat[0]] = stat[1]
+      end
+    end
+  end
+  away.each do |player|
+    if player[:player_name] == name
+      player.each do |stat|
+        stats[stat[0]] = stat[1]
+      end
+    end
+  end
+  stats
+end
+
+def biggest
+  biggest = 0
+  home.each do |player|
+    if player[:shoe] > biggest
+      biggest = player[:shoe]
+    end
+  end
+  away.each do |player|
+    if player[:shoe] > biggest
+      biggest = player[:shoe]
+    end
+  end
+  biggest
+end
+
+def big_shoe_rebounds
+  rebounds = 0
+  home.each do |player|
+    if player[:shoe] == biggest
+      rebounds = player[:rebounds]
+    end
+  end
+  away.each do |player|
+    if player[:shoe] == biggest
+      rebounds = player[:rebounds]
+    end
+  end
+  rebounds
+end
