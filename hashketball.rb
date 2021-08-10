@@ -241,3 +241,81 @@ def big_shoe_rebounds
   end
   rebounds
 end
+
+def most_points_scored
+  points = 0
+  home.each do |player|
+    if player[:points] > points
+      points = player[:points]
+    end
+  end
+  away.each do |player|
+    if player[:points] > points
+      points = player[:points]
+    end
+  end
+  puts points
+end
+
+def winning_team
+  homeArray = []
+  awayArray = []
+  home.each do |player|
+    homeArray.push(player[:points])
+  end
+  away.each do |player|
+    away.push(player[:points])
+  end
+  homePoints = homeArray.sum
+  awayPoints = awayArray.sum
+  if homePoints > awayPoints
+    puts game_hash[:home][:team_name]
+  else
+    puts game_hash[:away][:team_name]
+  end
+end
+
+def player_with_longest_name
+  longestName = ""
+  size = 0
+  home.each do |player|
+    if player[:player_name].length > size
+      size = player[:player_name].length
+      longestName = player[:player_name]
+    end
+  end
+  away.each do |player|
+    if player[:player_name].length > size
+      size = player[:player_name].length
+      longestName = player[:player_name]
+    end
+  end
+  longestName
+end
+
+def long_name_steals_a_ton?
+  numSteals = 0
+  home.each do |player|
+    if player[:steals] > numSteals
+      numSteals = player[:steals]
+    end
+  end
+  away.each do |player|
+    if player[:steals] > numSteals
+      numSteals = player[:steals]
+    end
+  end
+  puts numSteals
+  puts player_stats(player_with_longest_name)
+  if player_stats(player_with_longest_name)[:steals] == numSteals
+    puts true
+  else
+    puts false
+  end
+end
+
+most_points_scored
+winning_team
+player_with_longest_name
+long_name_steals_a_ton?
+
